@@ -68,10 +68,9 @@
 }
 
 .footer{
-  border-top: .3rem dashed;
-  font-size: 1.5rem;
-  margin: 2rem 0;
-  padding-top: 2rem;
+  background-color: #6c757d;
+  font-size: 1rem;
+  padding: 1.5rem;
 }
 
 @media (mix-width: 576px) and (max-width:768px) {
