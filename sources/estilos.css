@@ -27,6 +27,11 @@
   text-transform: uppercase;
 }
 
+.titulo-main{
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
 .centrar-elemento{
   display: flex;
   margin: auto;
@@ -44,25 +49,19 @@
   color: white;
 }
 
-.nav-item{
-  padding: 0 2rem;
-  font-size: 1.5rem;
-}
-
 .nav-link:hover{
   color: gold;
 }
 
-
-.titulo-main{
-  font-size: 3rem;
-  text-decoration: underline;
+.contenido-reseñas{
+  background-color: #d9d9d9;
+  border-radius: 1rem;
 }
+
 
 .titulo-formulario{
   font-size: 2rem;
 }
-
 
 .formulario-contacto{
   margin: 1rem;
@@ -79,11 +78,42 @@
   
 }
 
-@media (min-width:1200) {
+@media (min-width:1200px) {
+  .nav-item{
+    padding: 0 2rem;
+    font-size: 1.5rem;
+  }
+
+  .titulo-main{
+    font-size: 2.5rem;
+  }
+
+  .card-title{
+    text-decoration: underline;
+  }
+
+  .contenido-principal{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reseñas>.card{
+    margin: 2rem;
+  }
+
   .contenedor-productos{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 5rem;
+    margin: 1rem;
+  }
+
+  .card{
+    margin: 1rem;
+  }
+
+  .contenido-reseñas{
+    margin: 2rem;
+    padding: 2rem;
   }
 
   .formulario-contacto{
