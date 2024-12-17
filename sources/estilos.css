@@ -80,11 +80,21 @@
 @media (min-width:1200px) {
   .nav-item{
     padding: 0 2rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .titulo-main{
     font-size: 2.5rem;
+  }
+
+  .card{
+    border-radius: 2rem;
+    padding: .5rem;
+  }
+
+  .card-img-top{
+    width: 20rem;
+    margin: auto;
   }
 
   .card-title{
