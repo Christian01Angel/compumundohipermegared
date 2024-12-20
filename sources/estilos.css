@@ -72,9 +72,20 @@
 
 .contenido-reseñas{
   background-color: #d9d9d9;
+  display: flex;
   border-radius: 1rem;
+  margin: 2rem;
+  padding: 4rem 1rem 2rem 1rem;
 }
 
+.card{
+  margin: auto;
+}
+
+.ver-comentarios{
+  position: absolute;
+  margin: -3rem 2rem;
+}
 
 .titulo-formulario{
   font-size: 2rem;
@@ -90,8 +101,22 @@
   padding: 1.5rem;
 }
 
-@media (mix-width: 576px) and (max-width:768px) {
+@media (min-width: 870px) and (max-width:1199px) {
   
+  .contenedor-productos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: auto;
+  }
+
+  .card{
+    margin: auto;
+  }
+
+  .card-img-top{
+    width: 15rem;
+    margin: auto;
+  }
 }
 
 @media (min-width:1200px) {
@@ -110,6 +135,7 @@
   .card{
     border-radius: 2rem;
     padding: .5rem;
+    margin: 1rem;
   }
 
   .card-img-top{
@@ -121,28 +147,10 @@
     text-decoration: underline;
   }
 
-  .contenido-principal{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .reseñas>.card{
-    margin: 2rem;
-  }
-
   .contenedor-productos{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 1rem;
-  }
-
-  .card{
-    margin: 1rem;
-  }
-
-  .contenido-reseñas{
-    margin: 2rem;
-    padding: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: .7rem;
   }
 
   .formulario-contacto{

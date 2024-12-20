@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 var contadorCarrito = 0;
 
+var carrito = [];
+
 function iniciarApp(){
     cargarMain();
 }
@@ -13,18 +15,20 @@ async function cargarMain(){
     try{
         const resultado = await fetch('https://fakestoreapi.com/products/category/electronics');
         const productos = await resultado.json();
-        console.log(productos);
+        // console.log(productos);
 
         const contenedorProductos = document.querySelector('#contenedor-productos')
 
         productos.forEach(producto => {
             //Hago destructuring de los atributos:
-            var {title, price, description, image} = producto;
+            var {title, price, description, image, id} = producto;
+            console.log(id);
             
             //creo el div card
             const card = document.createElement('DIV');
             card.classList.add('card');
             card.style= 'width: 26rem;';
+            card.dataset.id = `${id}`;
             
             //imagen del producto
             const imagen = document.createElement('IMG');
@@ -84,14 +88,27 @@ function agregarCarrito(e){
     const boton = e.target;
     
     const spanContadorCarrito = document.querySelector('.contadorCarrito')
+    let cardActual = boton.parentElement.parentElement;
+    let bodyCard = cardActual.firstChild.nextSibling;
+    // console.log(cardActual)
     
     if (boton.text == 'agregar al carrito'.toUpperCase()) {
         boton.text = 'Quitar el carrito'.toUpperCase();
         contadorCarrito +=1;
+
+        // console.log(cardActual.firstChild.nextSibling);
+
+        carrito[parseInt(cardActual.dataset.id)]= {
+            id: parseInt(cardActual.dataset.id),
+            img: cardActual.firstChild.src,
+            nombre : bodyCard.firstChild.textContent,
+            precio: bodyCard.firstChild.nextSibling.textContent,
+        }
     }
     else{
         boton.text = 'agregar al carrito'.toUpperCase();
         contadorCarrito -=1;
+        delete(carrito[parseInt(cardActual.dataset.id)]);
     }
 
     if (contadorCarrito == 0) {
@@ -101,4 +118,5 @@ function agregarCarrito(e){
         spanContadorCarrito.textContent = `${contadorCarrito}`;
     }
     console.log(contadorCarrito)
+    console.log(carrito)
 }
