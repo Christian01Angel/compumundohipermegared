@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     iniciarApp();
 })
 
+var contadorCarrito = 0;
+
 function iniciarApp(){
     cargarMain();
 }
@@ -56,6 +58,7 @@ async function cargarMain(){
             botonComprar.classList.add('btn');
             botonComprar.classList.add('btn-primary')
             botonComprar.text = 'Agregar al Carrito'.toUpperCase();
+            botonComprar.addEventListener('click', e => agregarCarrito(e))
             
             //Agrego los elementos por orden al card
             bodyCard.appendChild(nombre);
@@ -74,4 +77,28 @@ async function cargarMain(){
         console.log(`Ah ocurrido un error: ${error}`)
     }
     
+}
+
+function agregarCarrito(e){
+    console.log(e.target);
+    const boton = e.target;
+    
+    const spanContadorCarrito = document.querySelector('.contadorCarrito')
+    
+    if (boton.text == 'agregar al carrito'.toUpperCase()) {
+        boton.text = 'Quitar el carrito'.toUpperCase();
+        contadorCarrito +=1;
+    }
+    else{
+        boton.text = 'agregar al carrito'.toUpperCase();
+        contadorCarrito -=1;
+    }
+
+    if (contadorCarrito == 0) {
+        spanContadorCarrito.textContent = '';
+    }
+    else{
+        spanContadorCarrito.textContent = `${contadorCarrito}`;
+    }
+    console.log(contadorCarrito)
 }

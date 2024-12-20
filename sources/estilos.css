@@ -43,6 +43,10 @@
 
 .navbar{
   background-color: black;
+  position: sticky;
+  top: 0;
+  z-index: 100000;
+  margin-bottom: 4rem;
 }
 
 .nav-link{
@@ -51,6 +55,19 @@
 
 .nav-link:hover{
   color: gold;
+}
+
+.carrito{
+  display: flex;
+}
+
+.contadorCarrito{
+  color: red;
+  font-size: 1rem;
+}
+
+.card-img-top{
+  width: auto;
 }
 
 .contenido-reseñas{
