@@ -38,7 +38,19 @@
 }
 
 .d-block{
-  padding-bottom: 9rem;
+  padding-bottom: 9.4rem;
+}
+
+.carrousel-descripcion{
+  font-size: 0.95rem;
+}
+
+.ver{
+  display: inherit;
+}
+
+.no-ver{
+  display: none;
 }
 
 .navbar{
@@ -46,7 +58,7 @@
   position: sticky;
   top: 0;
   z-index: 100000;
-  margin-bottom: 4rem;
+  margin-bottom: .3rem;
 }
 
 .nav-link{
@@ -55,6 +67,10 @@
 
 .nav-link:hover{
   color: gold;
+}
+
+.nav-link:visited{
+  color: white;
 }
 
 .carrito{
@@ -66,8 +82,23 @@
   font-size: 1rem;
 }
 
-.card-img-top{
+.buscador{
+  display: flex;
+  justify-content: center;
+}
+
+.form-control{
   width: auto;
+}
+
+.mensajeSesion{
+  color: black;
+  font-weight: bolder;
+  font-size: 1.5rem;
+}
+
+.card-img-top{
+  width: 90%;
 }
 
 .contenido-reseñas{

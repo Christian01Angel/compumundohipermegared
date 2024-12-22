@@ -20,7 +20,8 @@
         <h1 class="titulo text-center fontFamily">Compu Mundo Hiper Mega Red</h1>
     </header>
 
-    <nav class="navbar navbar-expand-lg">
+    <div class="nav-normal ver">
+      <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -41,21 +42,66 @@
               <li class="nav-item">
                 <a class="nav-link" href="productos.html">Productos</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="inicioSesion.html">iniciar Sesion</a>
-              </li>
             </ul>
             <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Ej: Samsung 49-Inch" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
               <button class="btn btn-outline-success carrito" type="submit"><span class="material-symbols-outlined">shopping_cart<span class="contadorCarrito"></span></span></p></button>
             </form>
           </div>
         </div>
       </nav>
+    </div>
+
+    <div class="nav-responsivo no-ver">
+      <nav class="navbar bg-light fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Offcanvas navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex mt-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
 
     <main id="main">
-        
+      <div class="buscador">
+        <input class="form-control me-2" type="search" placeholder="Ej: Samsung 49-Inch" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </div>
+
+      <p class="mensajeSesion text-center"></p>
         <h2 class="text-center titulo-main">Novedades</h2>
 
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -70,28 +116,28 @@
               <img src="sources/img/SanDisk SSD PLUS 1TB Internal SSD - SATA III.jpeg" class="d-block centrar-elemento" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>SanDisk SSD PLUS 1TB</h5>
-                <p>Promueve un arranque mas rápido, apagado, carga de aplicaciones y respuesta más rápidas. Aumenta el rendimiento de escritura en ráfaga, lo que lo hace ideal para cargas de trabajo de PC típicas. El equilibrio perfecto entre rendimiento y confiabilidad</p>
+                <p class="carrousel-descripcion">Promueve un arranque mas rápido, carga de aplicaciones y respuesta más rápidas. Aumenta el rendimiento de escritura en ráfaga, lo que lo hace ideal para cargas de trabajo de PC típicas. El equilibrio perfecto entre rendimiento y confiabilidad</p>
               </div>
             </div>
             <div class="carousel-item" data-bs-interval="2000">
               <img src="sources/img/WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive.jpeg" class="d-block centrar-elemento" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>WD 4TB</h5>
-                <p>Disco externo de 4TB cpmpatible con PS4, configuración rápida y sencilla, diseño elegante con gran capacidad, garantía limitada del fabricante por 3 años</p>
+                <p class="carrousel-descripcion">Disco externo de 4TB cpmpatible con PS4, configuración rápida y sencilla, diseño elegante con gran capacidad, garantía limitada del fabricante por 3 años</p>
               </div>
             </div>
             <div class="carousel-item">
               <img src="sources/img/Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III.jpeg" class="d-block centrar-elemento" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Silicon Power 256GB</h5>
-                <p>Velocidades de transferencia notables que junto a la tecnología avanzada de caché SLC mejoran el rendimiento general del sistema, permite un arranque más rápido y otorga una vida útil más larga. Diseño delgado de 7 mm adecuado para notebooks ultradelgados.</p>
+                <p class="carrousel-descripcion">Velocidades de transferencia notables que junto a la tecnología avanzada de caché SLC mejoran el rendimiento general del sistema, permite un arranque más rápido y otorga una vida útil más larga. Diseño delgado de 7 mm adecuado para notebooks ultradelgados.</p>
               </div>
             </div>
             <div class="carousel-item">
               <img src="sources/img/Disco 2TB_.jpeg" class="d-block centrar-elemento" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>WD 2TB Elements</h5>
-                <p>Compatibilidad con USB 3.0 y USB 2.0 Transferencias de datos rápidas. Mejora el rendimiento de la PC Alta capacidad; compatibilidad Formato NTFS para Windows 10, Windows 8.1, Windows 7;</p>
+                <p class="carrousel-descripcion">Compatibilidad con USB 3.0 y USB 2.0 Transferencias de datos rápidas. Mejora el rendimiento de la PC Alta capacidad; compatibilidad Formato NTFS para Windows 10, Windows 8.1, Windows 7;</p>
               </div>
             </div>
           </div>

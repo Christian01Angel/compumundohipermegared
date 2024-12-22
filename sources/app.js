@@ -8,6 +8,7 @@ var carrito = [];
 
 function iniciarApp(){
     cargarMain();
+    detectarPantalla();
 }
 
 async function cargarMain(){
@@ -119,4 +120,18 @@ function agregarCarrito(e){
     }
     console.log(contadorCarrito)
     console.log(carrito)
+}
+
+function detectarPantalla(){
+    console.log(`El ancho de tu pantalla es de: ${screen.width}`);
+
+    const navBarNormal = document.querySelector('.nav-normal');
+    const navBarResponsivo = document.querySelector('.nav-responsivo');
+
+    if (screen.width < 768){
+        
+    }
+    else if (screen.width > 768){
+
+    }
 }
