@@ -88,11 +88,19 @@ function agregarCarrito(e){
     console.log(e.target);
     const boton = e.target;
     
-    const spanContadorCarrito = document.querySelector('.contadorCarrito')
+    let spanContadorCarrito = document.querySelectorAll('.contadorCarrito')
     let cardActual = boton.parentElement.parentElement;
     let bodyCard = cardActual.firstChild.nextSibling;
     // console.log(cardActual)
-    
+
+    //Si la pantalla es mayor a 992, el span de contador carrito será el 1ero a tener en cuenta, y la pantalla es menor a 992px se tomará en cuenta el segundo span contador
+    if (screen.width < 992) {
+        spanContadorCarrito = spanContadorCarrito[1];
+    }
+    else if (screen.width > 992) {
+        spanContadorCarrito = spanContadorCarrito[0];
+    }
+
     if (boton.text == 'agregar al carrito'.toUpperCase()) {
         boton.text = 'Quitar el carrito'.toUpperCase();
         contadorCarrito +=1;
@@ -125,13 +133,27 @@ function agregarCarrito(e){
 function detectarPantalla(){
     console.log(`El ancho de tu pantalla es de: ${screen.width}`);
 
-    const navBarNormal = document.querySelector('.nav-normal');
-    const navBarResponsivo = document.querySelector('.nav-responsivo');
+    const navNormal = document.querySelector('.nav-normal');
+    const navResponsivo = document.querySelector('.nav-responsivo');
+    const buscador = document.querySelectorAll('.buscador');
 
-    if (screen.width < 768){
-        
+    if (screen.width < 992){
+        navNormal.classList.remove('ver');
+        navNormal.classList.add('no-ver');
+        navResponsivo.classList.remove('no-ver');
+        navResponsivo.classList.add('ver');
+        buscador[0].classList.remove('no-ver');
+        buscador[0].classList.add('ver');
+        buscador[1].classList.remove('ver');
+        buscador[1].classList.add('no-ver');
     }
-    else if (screen.width > 768){
-
+    else if (screen.width > 992){
+        navNormal.classList.remove('no-ver');
+        navNormal.classList.add('ver');
+        navResponsivo.classList.remove('ver');
+        navResponsivo.classList.add('no-ver');
+        buscador[0].classList.add('no-ver');
+        buscador[0].classList.remove('ver');
     }
+    // console.log(buscador);
 }
