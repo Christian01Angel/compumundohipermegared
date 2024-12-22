@@ -105,7 +105,7 @@
 
 .card{
   margin: auto;
-  width: 95%;
+  width: 90%;
 }
 
 .card-img-top{
@@ -164,6 +164,12 @@
   }
   .carrito{
     padding: 0 1rem;
+  }
+
+  .buscador{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .titulo-main{
