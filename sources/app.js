@@ -9,6 +9,7 @@ var carrito = [];
 function iniciarApp(){
     cargarMain();
     detectarPantalla();
+    mostrarCarrito();
 }
 
 async function cargarMain(){
@@ -28,7 +29,6 @@ async function cargarMain(){
             //creo el div card
             const card = document.createElement('DIV');
             card.classList.add('card');
-            card.style= 'width: 26rem;';
             card.dataset.id = `${id}`;
             
             //imagen del producto
@@ -156,4 +156,27 @@ function detectarPantalla(){
         buscador[0].classList.remove('ver');
     }
     // console.log(buscador);
+}
+
+function mostrarCarrito(){
+    const buscador = document.querySelectorAll('.btn-outline-success');
+    if (screen.width < 992){
+        buscador = buscador[0];
+    }
+    else if (screen.width > 992){
+        buscador = buscador[1];
+    }
+
+    buscador.addEventListener('click', (e) => buscar());
+
+    console.log(buscador);
+}
+
+function buscar(evento){
+    const {id, img, nombre, precio} = carrito;
+    console.log(evento.targert);
+
+    const main = document.querySelector('.productos')
+
+
 }

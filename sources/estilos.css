@@ -49,7 +49,7 @@
   display: initial !important;
 }
 
-.no-ver{
+.no-ver, #main > .no-ver{
   display: none !important;
 }
 
@@ -81,6 +81,11 @@
 
 .carrito{
   display: flex;
+  margin-right: 1rem;
+}
+
+.navbar>.container-fluid{
+  flex-wrap: nowrap;
 }
 
 .contadorCarrito{
@@ -91,6 +96,10 @@
 .buscador{
   display: flex !important;
   justify-content: center !important;
+}
+
+.input-busqueda{
+  width: 2rem;
 }
 
 .form-control{
@@ -105,19 +114,22 @@
 
 .card{
   margin: auto;
-  width: 90%;
-}
-
-.card-img-top{
-  width: 90%;
+  width: 95%;
 }
 
 .contenido-reseñas{
   background-color: #d9d9d9;
   display: flex;
+  flex-direction: column;
   border-radius: 1rem;
   margin: 2rem;
   padding: 4rem 1rem 2rem 1rem;
+}
+
+.card-reseñas{
+  margin: auto;
+  padding: 1rem;
+  width: 90%;
 }
 
 .ver-comentarios{
@@ -163,7 +175,7 @@
     font-size: 1.2rem;
   }
   .carrito{
-    padding: 0 1rem;
+    padding: .5rem 1rem;
   }
 
   .buscador{
