@@ -9,7 +9,6 @@ var carrito = [];
 function iniciarApp(){
     cargarMain();
     detectarPantalla();
-    mostrarCarrito();
 }
 
 async function cargarMain(){
@@ -81,6 +80,31 @@ async function cargarMain(){
     }catch (error){
         console.log(`Ah ocurrido un error: ${error}`)
     }
+
+    //Asociamos una funcion al boton del carrito
+    const btnsCarrito = document.querySelectorAll('.carrito')
+    btnsCarrito.forEach(btnCarrito => {
+        btnCarrito.addEventListener('click', () => {
+            mostrarCarrito();
+        })
+    });
+
+    //Asociamos una funcion al boton de busqueda
+    const btnsBuscar = document.querySelectorAll('.btn-buscar');
+    btnsBuscar.forEach(btnBuscar => {
+        btnBuscar.addEventListener('click', (e) =>{
+            buscar(e);
+        })
+    })
+
+    //Asociamos una funcion al input de busqueda
+    const inputsBusqueda = document.querySelectorAll('.input-busqueda');
+
+    inputsBusqueda.forEach(inputBusqueda => {
+        inputBusqueda.addEventListener('input', (e) => {
+            buscar(e);
+        })
+    })
     
 }
 
@@ -159,17 +183,12 @@ function detectarPantalla(){
 }
 
 function mostrarCarrito(){
-    const buscador = document.querySelectorAll('.btn-outline-success');
-    if (screen.width < 992){
-        buscador = buscador[0];
+    if (contadorCarrito == 0){
+        //mostrar que no hay productos agregados
     }
-    else if (screen.width > 992){
-        buscador = buscador[1];
+    else if (contadorCarrito > 0){
+        //Funcion para mostrar los productos
     }
-
-    buscador.addEventListener('click', (e) => buscar());
-
-    console.log(buscador);
 }
 
 function buscar(evento){
