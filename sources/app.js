@@ -183,11 +183,65 @@ function detectarPantalla(){
 }
 
 function mostrarCarrito(){
-    if (contadorCarrito == 0){
-        //mostrar que no hay productos agregados
-    }
-    else if (contadorCarrito > 0){
-        //Funcion para mostrar los productos
+
+    let navBar;
+    // console.log(document.querySelector('.mostrar-carrito'))
+
+    //verificamos si ya existe el div que muestre los productos del carrito, si existe lo removemos, y sino lo creamos.
+
+    if(document.querySelector('.mostrar-carrito') != null){
+        document.querySelector('.mostrar-carrito').remove();
+    }else{
+        const divCarrito = document.createElement('DIV'); //Div que va a contener y mostrar toda la informacion del carrito
+        divCarrito.classList.add('ver');
+        divCarrito.classList.add('mostrar-carrito');
+        
+        const headerCarrito = document.createElement('DIV'); //Div que va a contener el titulo y un boton para cerrar el carrito
+        headerCarrito.classList.add('offcanvas-header');
+        
+        const tituloCarrito = document.createElement('H2');
+        tituloCarrito.textContent = 'Carrito de compras'.toUpperCase();
+        tituloCarrito.classList.add('text-center');
+
+        const btnCerrar = document.createElement('BUTTON');
+        btnCerrar.type = 'buton';
+        btnCerrar.classList.add('btn-close');
+        btnCerrar.classList.add('bg-white');
+        btnCerrar.addEventListener('click', () => {
+            mostrarCarrito();
+        })
+
+        const divProductos = document.createElement('DIV'); //Aca se van a mostrar los productos a comprar
+
+        const tituloDetalleCompra = document.createElement('H3');
+        tituloDetalleCompra.textContent = 'Productos Agregados';
+        tituloDetalleCompra.classList.add('text-center');
+
+        //Los elementos hasta aca van a estar si o si sea que haya productos en el carrito o no, por lo tanto ya voy armando el esquema
+        divProductos.appendChild(tituloDetalleCompra);
+        headerCarrito.appendChild(tituloCarrito);
+        headerCarrito.appendChild(btnCerrar);
+
+        divCarrito.appendChild(headerCarrito);
+        divCarrito.appendChild(divProductos);
+
+        
+        if (contadorCarrito == 0){
+            //mostrar que no hay productos agregados
+        }
+        else if (contadorCarrito > 0){
+            //Funcion para mostrar los productos
+        }
+
+        // Todo este contenido se va a agregar a una barra de navegacion, dependiendo del tamaño de la pantalla del dispositivo
+        if(screen.width > 992){
+            navBar = document.querySelector('.nav-normal')
+        }else{
+            navBar = document.querySelector('.nav-responsivo')
+        }
+
+        // console.log(navBar)
+        navBar.appendChild(divCarrito);
     }
 }
 
