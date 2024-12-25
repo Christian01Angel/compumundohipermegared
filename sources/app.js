@@ -125,24 +125,24 @@ function agregarCarrito(e){
         spanContadorCarrito = spanContadorCarrito[0];
     }
 
-    if (boton.text == 'agregar al carrito'.toUpperCase()) {
-        boton.text = 'Quitar el carrito'.toUpperCase();
         contadorCarrito +=1;
 
         // console.log(cardActual.firstChild.nextSibling);
+    if(carrito[parseInt(cardActual.dataset.id)] == null){
 
         carrito[parseInt(cardActual.dataset.id)]= {
             id: parseInt(cardActual.dataset.id),
             img: cardActual.firstChild.src,
             nombre : bodyCard.firstChild.textContent,
             precio: bodyCard.firstChild.nextSibling.textContent,
+            cantidad: 1, 
         }
     }
     else{
-        boton.text = 'agregar al carrito'.toUpperCase();
-        contadorCarrito -=1;
-        delete(carrito[parseInt(cardActual.dataset.id)]);
+        
+        carrito[parseInt(cardActual.dataset.id)].cantidad += 1;
     }
+    
 
     if (contadorCarrito == 0) {
         spanContadorCarrito.textContent = '';
@@ -214,7 +214,7 @@ function mostrarCarrito(){
         const divProductos = document.createElement('DIV'); //Aca se van a mostrar los productos a comprar
 
         const tituloDetalleCompra = document.createElement('H3');
-        tituloDetalleCompra.textContent = 'Productos Agregados';
+        tituloDetalleCompra.textContent = 'Productos en el carrito'.toUpperCase();
         tituloDetalleCompra.classList.add('text-center');
 
         //Los elementos hasta aca van a estar si o si sea que haya productos en el carrito o no, por lo tanto ya voy armando el esquema
@@ -228,10 +228,68 @@ function mostrarCarrito(){
         
         if (contadorCarrito == 0){
             //mostrar que no hay productos agregados
+            const sinProductos = document.createElement('P');
+            sinProductos.textContent = 'Todavia no tenes productos agregados al carrito';
+            sinProductos.classList.add('sin-productos');
+            divProductos.appendChild(sinProductos);
+
         }
         else if (contadorCarrito > 0){
-            //Funcion para mostrar los productos
+            //En esta parte se agregan los productos al detalle del carrito
+
+            //contador del total
+            let precioTotal = 0;
+            carrito.forEach(producto =>{
+                const {id, img, nombre, precio, cantidad} = producto;
+
+                //Sumamos el total
+                precioTotal += (parseInt(precio.split('$')[1]) * cantidad);
+                // console.log(`Precio total a pagar: ${precioTotal}`);
+
+                //div general card
+                const contenedorProducto = document.createElement('DIV');
+                //img
+                const imgProducto = document.createElement('IMG');
+                imgProducto.src = `${img}`;
+                //Cantidad de productos parrafo
+                const cantidadP = document.createElement('P');
+                cantidadP.textContent = 'Cantidad de productos: '
+                //cantidad de productos input
+                const cantidadInp = document.createElement('INPUT');
+                cantidadInp.type = 'numbre';
+                cantidadInp.value = cantidad;
+                //div con nombre y precio
+                const divDetalles = document.createElement('DIV');
+                //nombre
+                const nombreP = document.createElement('P');
+                nombreP.textContent = `${nombre}`;
+                //precio
+                const precioP = document.createElement('P');
+                precioP.textContent = `${precio}`;
+
+                //Agregamos un enlace para eliminar el producto del carrito
+                const eliminarProducto = document.createElement('A');
+                eliminarProducto.textContent = 'Eliminar Producto';
+                eliminarProducto.addEventListener('click', ()=>{
+                    eliminarProducto();
+                })
+
+                //Armamos la "card";
+                divDetalles.appendChild(nombreP);
+                divDetalles.appendChild(precioP);
+                contenedorProducto.appendChild(imgProducto);
+                contenedorProducto.appendChild(cantidadP);
+                contenedorProducto.appendChild(cantidadInp);
+                contenedorProducto.appendChild(divDetalles);
+                contenedorProducto.appendChild(eliminarProducto);
+
+                //Agregamos el producto al div de productos
+                divProductos.appendChild(contenedorProducto);
+            })
+
+            //Agregar el total de los productos
         }
+
 
         // Todo este contenido se va a agregar a una barra de navegacion, dependiendo del tamaño de la pantalla del dispositivo
         if(screen.width > 992){
