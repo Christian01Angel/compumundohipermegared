@@ -112,18 +112,9 @@ function agregarCarrito(e){
     console.log(e.target);
     const boton = e.target;
     
-    let spanContadorCarrito = document.querySelectorAll('.contadorCarrito')
     let cardActual = boton.parentElement.parentElement;
     let bodyCard = cardActual.firstChild.nextSibling;
     // console.log(cardActual)
-
-    //Si la pantalla es mayor a 992, el span de contador carrito será el 1ero a tener en cuenta, y la pantalla es menor a 992px se tomará en cuenta el segundo span contador
-    if (screen.width < 992) {
-        spanContadorCarrito = spanContadorCarrito[1];
-    }
-    else if (screen.width > 992) {
-        spanContadorCarrito = spanContadorCarrito[0];
-    }
 
         contadorCarrito +=1;
 
@@ -142,16 +133,30 @@ function agregarCarrito(e){
         
         carrito[parseInt(cardActual.dataset.id)].cantidad += 1;
     }
-    
 
-    if (contadorCarrito == 0) {
+    contadorParaCarrito(contadorCarrito)
+    
+    console.log(contadorCarrito)
+    console.log(carrito)
+}
+
+function contadorParaCarrito(contador){
+    let spanContadorCarrito = document.querySelectorAll('.contadorCarrito');
+
+    //Si la pantalla es mayor a 992, el span de contador carrito será el 1ero a tener en cuenta, y la pantalla es menor a 992px se tomará en cuenta el segundo span contador
+    if (screen.width < 992) {
+        spanContadorCarrito = spanContadorCarrito[1];
+    }
+    else if (screen.width > 992) {
+        spanContadorCarrito = spanContadorCarrito[0];
+    }
+
+    if (contador == 0) {
         spanContadorCarrito.textContent = '';
     }
     else{
         spanContadorCarrito.textContent = `${contadorCarrito}`;
     }
-    console.log(contadorCarrito)
-    console.log(carrito)
 }
 
 function detectarPantalla(){
@@ -270,8 +275,16 @@ function mostrarCarrito(){
                 //Agregamos un enlace para eliminar el producto del carrito
                 const eliminarProducto = document.createElement('A');
                 eliminarProducto.textContent = 'Eliminar Producto';
-                eliminarProducto.addEventListener('click', ()=>{
-                    eliminarProducto();
+                eliminarProducto.addEventListener('click', (e) =>{
+                    delete(carrito[id]);
+                    // console.log(e.target.previousSibling.previousSibling.value)
+                    contadorCarrito -= e.target.previousSibling.previousSibling.value;
+
+                    contadorParaCarrito(contadorCarrito);
+
+                    mostrarCarrito();
+                    mostrarCarrito();
+                    // eliminarProducto();
                 })
 
                 //Armamos la "card";
