@@ -283,14 +283,9 @@ function mostrarCarrito(){
                     contadorParaCarrito();
 
                     calcularTotal();
-                    mostrarCarrito();
+                    quitarCarrito();
                     mostrarCarrito();
                 })
-
-                //Parrafo que contendrá el total.
-                const totalPagar = document.createElement('P');
-                totalPagar.classList.add('text-center');
-                totalPagar.classList.add('precio-total');
 
                 //Armamos la "card";
                 divDetalles.appendChild(nombreP);
@@ -304,8 +299,13 @@ function mostrarCarrito(){
 
                 //Agregamos el producto al div de productos
                 divProductos.appendChild(contenedorProducto);
-                divCarrito.appendChild(totalPagar);
             })
+            
+            //Parrafo que contendrá el total.
+            const totalPagar = document.createElement('P');
+            totalPagar.classList.add('text-center');
+            totalPagar.classList.add('precio-total');
+            divCarrito.appendChild(totalPagar);
         }
         
         
