@@ -93,6 +93,67 @@
   font-size: 1rem;
 }
 
+.mostrar-carrito{
+  background-color: #6c757d;
+  position: absolute;
+  z-index: 199999999;
+  right: 0;
+  top: 0;
+  width: 70%;
+  min-height: 300%;
+  scrollbar-width: auto;
+}
+
+.carrito-header{
+  display: flex;
+  justify-content: end;
+}
+
+.titulo-carrito{
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.sin-productos{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.card-carrito{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 1rem;
+}
+
+.carrito-img{
+  width: 6rem;
+  margin-right: 1rem;
+}
+
+.carrito-detalles{
+  display: block;
+}
+
+.carrito-input{
+  display: flex;
+}
+
+.carrito-eliminar{
+  color: red;
+  text-decoration: none;
+}
+
+.carrito-eliminar:hover{
+  cursor: pointer;
+  color: black;
+}
+
+.precio-total{
+  margin-top: 3rem;
+  border: solid 0.1rem black;
+}
+
 .buscador{
   display: flex !important;
   justify-content: center !important;

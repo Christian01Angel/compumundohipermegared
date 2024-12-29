@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     iniciarApp();
 })
 
-var contadorCarrito = 0;
-
 var carrito = [];
+
+var contador = 0;
 
 function iniciarApp(){
     cargarMain();
@@ -116,8 +116,6 @@ function agregarCarrito(e){
     let bodyCard = cardActual.firstChild.nextSibling;
     // console.log(cardActual)
 
-        contadorCarrito +=1;
-
         // console.log(cardActual.firstChild.nextSibling);
     if(carrito[parseInt(cardActual.dataset.id)] == null){
 
@@ -133,14 +131,16 @@ function agregarCarrito(e){
         
         carrito[parseInt(cardActual.dataset.id)].cantidad += 1;
     }
-
-    contadorParaCarrito(contadorCarrito)
-    
-    console.log(contadorCarrito)
     console.log(carrito)
+    contadorParaCarrito();
 }
 
-function contadorParaCarrito(contador){
+function contadorParaCarrito(){
+    contador = 0;
+    carrito.forEach(producto =>{
+        const {cantidad} = producto;
+        contador += cantidad;
+    })
     let spanContadorCarrito = document.querySelectorAll('.contadorCarrito');
 
     //Si la pantalla es mayor a 992, el span de contador carrito será el 1ero a tener en cuenta, y la pantalla es menor a 992px se tomará en cuenta el segundo span contador
@@ -155,7 +155,7 @@ function contadorParaCarrito(contador){
         spanContadorCarrito.textContent = '';
     }
     else{
-        spanContadorCarrito.textContent = `${contadorCarrito}`;
+        spanContadorCarrito.textContent = `${contador}`;
     }
 }
 
@@ -191,39 +191,36 @@ function mostrarCarrito(){
 
     let navBar;
     // console.log(document.querySelector('.mostrar-carrito'))
-
-    //verificamos si ya existe el div que muestre los productos del carrito, si existe lo removemos, y sino lo creamos.
-
-    if(document.querySelector('.mostrar-carrito') != null){
-        document.querySelector('.mostrar-carrito').remove();
-    }else{
+    
         const divCarrito = document.createElement('DIV'); //Div que va a contener y mostrar toda la informacion del carrito
         divCarrito.classList.add('ver');
         divCarrito.classList.add('mostrar-carrito');
         
         const headerCarrito = document.createElement('DIV'); //Div que va a contener el titulo y un boton para cerrar el carrito
-        headerCarrito.classList.add('offcanvas-header');
+        headerCarrito.classList.add('carrito-header');
+        headerCarrito.classList.add('text-center');
         
         const tituloCarrito = document.createElement('H2');
         tituloCarrito.textContent = 'Carrito de compras'.toUpperCase();
-        tituloCarrito.classList.add('text-center');
+        tituloCarrito.classList.add('titulo-carrito');
 
         const btnCerrar = document.createElement('BUTTON');
-        btnCerrar.type = 'buton';
+        btnCerrar.type = 'button';
         btnCerrar.classList.add('btn-close');
         btnCerrar.classList.add('bg-white');
         btnCerrar.addEventListener('click', () => {
-            mostrarCarrito();
+            quitarCarrito();
         })
 
         const divProductos = document.createElement('DIV'); //Aca se van a mostrar los productos a comprar
+        divProductos.classList.add('carrito-productos');
 
-        const tituloDetalleCompra = document.createElement('H3');
-        tituloDetalleCompra.textContent = 'Productos en el carrito'.toUpperCase();
-        tituloDetalleCompra.classList.add('text-center');
+        // const tituloDetalleCompra = document.createElement('H3');
+        // tituloDetalleCompra.textContent = 'Productos en el carrito'.toUpperCase();
+        // tituloDetalleCompra.classList.add('text-center');
 
         //Los elementos hasta aca van a estar si o si sea que haya productos en el carrito o no, por lo tanto ya voy armando el esquema
-        divProductos.appendChild(tituloDetalleCompra);
+        // divProductos.appendChild(tituloDetalleCompra);
         headerCarrito.appendChild(tituloCarrito);
         headerCarrito.appendChild(btnCerrar);
 
@@ -231,89 +228,128 @@ function mostrarCarrito(){
         divCarrito.appendChild(divProductos);
 
         
-        if (contadorCarrito == 0){
+        if (contador == 0){
             //mostrar que no hay productos agregados
             const sinProductos = document.createElement('P');
             sinProductos.textContent = 'Todavia no tenes productos agregados al carrito';
             sinProductos.classList.add('sin-productos');
+            sinProductos.classList.add('text-center')
             divProductos.appendChild(sinProductos);
 
         }
-        else if (contadorCarrito > 0){
+        else if (contador > 0){
             //En esta parte se agregan los productos al detalle del carrito
-
-            //contador del total
-            let precioTotal = 0;
             carrito.forEach(producto =>{
                 const {id, img, nombre, precio, cantidad} = producto;
 
-                //Sumamos el total
-                precioTotal += (parseInt(precio.split('$')[1]) * cantidad);
-                // console.log(`Precio total a pagar: ${precioTotal}`);
-
                 //div general card
                 const contenedorProducto = document.createElement('DIV');
+                contenedorProducto.classList.add('card-carrito');
                 //img
                 const imgProducto = document.createElement('IMG');
+                imgProducto.classList.add('carrito-img');
                 imgProducto.src = `${img}`;
-                //Cantidad de productos parrafo
-                const cantidadP = document.createElement('P');
-                cantidadP.textContent = 'Cantidad de productos: '
-                //cantidad de productos input
-                const cantidadInp = document.createElement('INPUT');
-                cantidadInp.type = 'numbre';
-                cantidadInp.value = cantidad;
                 //div con nombre y precio
                 const divDetalles = document.createElement('DIV');
+                divDetalles.classList.add('carrito-detalles')
                 //nombre
                 const nombreP = document.createElement('P');
                 nombreP.textContent = `${nombre}`;
                 //precio
                 const precioP = document.createElement('P');
-                precioP.textContent = `${precio}`;
+                precioP.textContent = `Precio Unitario: ${precio}`;
+                //Div para el input de cantidad
+                const contenedorInput = document.createElement('DIV');
+                contenedorInput.classList.add('carrito-input');
+                //Cantidad de productos parrafo
+                const cantidadP = document.createElement('P');
+                cantidadP.textContent = 'Cantidad de productos: ';
+                //cantidad de productos input
+                const cantidadInp = document.createElement('INPUT');
+                cantidadInp.type = 'number';
+                cantidadInp.value = cantidad;
+                cantidadInp.addEventListener('input', (e) =>{
+                    cantidadProductos(e, id);
+                })
 
                 //Agregamos un enlace para eliminar el producto del carrito
                 const eliminarProducto = document.createElement('A');
                 eliminarProducto.textContent = 'Eliminar Producto';
+                eliminarProducto.classList.add('carrito-eliminar');
                 eliminarProducto.addEventListener('click', (e) =>{
                     delete(carrito[id]);
-                    // console.log(e.target.previousSibling.previousSibling.value)
-                    contadorCarrito -= e.target.previousSibling.previousSibling.value;
+                    console.log(e.target.previousSibling.firstChild.nextSibling.value);
 
-                    contadorParaCarrito(contadorCarrito);
+                    contadorParaCarrito();
 
+                    calcularTotal();
                     mostrarCarrito();
                     mostrarCarrito();
-                    // eliminarProducto();
                 })
+
+                //Parrafo que contendrá el total.
+                const totalPagar = document.createElement('P');
+                totalPagar.classList.add('text-center');
+                totalPagar.classList.add('precio-total');
 
                 //Armamos la "card";
                 divDetalles.appendChild(nombreP);
                 divDetalles.appendChild(precioP);
+                contenedorInput.appendChild(cantidadP);
+                contenedorInput.appendChild(cantidadInp);
                 contenedorProducto.appendChild(imgProducto);
-                contenedorProducto.appendChild(cantidadP);
-                contenedorProducto.appendChild(cantidadInp);
                 contenedorProducto.appendChild(divDetalles);
+                contenedorProducto.appendChild(contenedorInput);
                 contenedorProducto.appendChild(eliminarProducto);
 
                 //Agregamos el producto al div de productos
                 divProductos.appendChild(contenedorProducto);
+                divCarrito.appendChild(totalPagar);
             })
-
-            //Agregar el total de los productos
         }
-
-
+        
+        
         // Todo este contenido se va a agregar a una barra de navegacion, dependiendo del tamaño de la pantalla del dispositivo
         if(screen.width > 992){
             navBar = document.querySelector('.nav-normal')
         }else{
             navBar = document.querySelector('.nav-responsivo')
         }
-
+        
         // console.log(navBar)
         navBar.appendChild(divCarrito);
+        //Agregar el total de los productos
+        calcularTotal();
+    
+}
+
+function quitarCarrito(){
+    if(document.querySelector('.mostrar-carrito') != null){
+        document.querySelector('.mostrar-carrito').remove();
     }
+}
+
+function cantidadProductos(e, id){
+    // console.log(e.target.value);
+    // console.log(carrito[e.target.parentElement.previousSibling.firstChild]);
+    // console.log(id);
+    carrito[id].cantidad = parseInt(e.target.value);
+    calcularTotal();
+    contadorParaCarrito();
+}
+
+function calcularTotal(){
+    //Variable que acumulará el total a pagar
+    let precioTotal = 0;
+    //Parrafo donde se mostrara el total a pagar
+    const totalPagar = document.querySelector('.precio-total');
+
+    carrito.forEach(producto => {
+        //recuperamos los datos del carrito
+        const {precio, cantidad} = producto;
+        precioTotal += (parseInt(precio.split('$')[1]) * cantidad);
+    })
+    totalPagar.textContent = `Total a Pagar: $${precioTotal}`;
 }
 
 function buscar(evento){
