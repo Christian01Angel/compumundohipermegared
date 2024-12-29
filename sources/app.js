@@ -41,7 +41,7 @@ async function cargarMain(){
             const bodyCard = document.createElement('DIV');
             bodyCard.classList.add('card-body');
 
-            //titulo h5
+            //nombre h5
             const nombre = document.createElement('H5');
             nombre.textContent = `${title}`;
             nombre.classList.add('card-title');
@@ -353,8 +353,29 @@ function calcularTotal(){
 }
 
 function buscar(evento){
-    const {id, img, nombre, precio} = carrito;
-    console.log(evento.targert);
+    console.log(evento.target.value);
+
+    //Recuperamos los productos por nombre dentro de la card
+    const contenedorNombres = document.querySelectorAll('.card-title');
+    const contenidoBusqueda = evento.target.value.toLowerCase();
+
+    console.log(contenedorNombres)
+    
+    contenedorNombres.forEach(nombre =>{
+        //ubicamos al elemento padre general, que seria la card, para cambiarle el estilo.
+        console.log(nombre);
+        const card = nombre.parentElement.parentElement;
+
+        nombre = nombre.textContent.toLowerCase();
+
+        if (nombre.includes(contenidoBusqueda)){
+            card.classList.add('ver');
+            card.classList.remove('no-ver');
+        }else{
+            card.classList.add('no-ver');
+            card.classList.remove('ver');
+        }
+    })
 
     const main = document.querySelector('.productos')
 
