@@ -121,14 +121,11 @@
 }
 
 .card-carrito{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-left: 1rem;
+  display: block;
 }
 
 .carrito-img{
-  width: 6rem;
-  margin-right: 1rem;
+  width: 4rem;
 }
 
 .carrito-detalles{
@@ -221,6 +218,17 @@
     margin: auto;
   }
 
+  .card-carrito{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 1rem;
+  }
+
+  .carrito-img{
+    width: 6rem;
+    margin-right: 1rem;
+  }
+
   .card{
     margin: auto;
   }
@@ -236,8 +244,20 @@
     padding: 0 2rem;
     font-size: 1.2rem;
   }
+
   .carrito{
     padding: .5rem 1rem;
+  }
+
+  .card-carrito{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 1rem;
+  }
+
+  .carrito-img{
+    width: 6rem;
+    margin-right: 1rem;
   }
 
   .buscador{
