@@ -14,7 +14,7 @@ function iniciarApp(){
 async function cargarMain(){
 
     try{
-        const resultado = await fetch('https://fakestoreapi.com/products/category/electronics');
+        const resultado = await fetch('http://localhost:8080/articulos');
         const productos = await resultado.json();
         // console.log(productos);
 
@@ -22,7 +22,7 @@ async function cargarMain(){
 
         productos.forEach(producto => {
             //Hago destructuring de los atributos:
-            var {title, price, description, image, id} = producto;
+            var {id, nombre, precio, descripcion, imagen} = producto;
             console.log(id);
             
             //creo el div card
@@ -31,31 +31,31 @@ async function cargarMain(){
             card.dataset.id = `${id}`;
             
             //imagen del producto
-            const imagen = document.createElement('IMG');
-            imagen.src = `${image}`;
-            imagen.classList.add('card-img-top');
-            imagen.name= `${title}`;
-            imagen.alt = `${title}`;
+            const imagenT = document.createElement('IMG');
+            imagenT.src = `${imagen}`;
+            imagenT.classList.add('card-img-top');
+            imagenT.name= `${nombre}`;
+            imagenT.alt = `${nombre}`;
 
             //div cuerpo de la card
             const bodyCard = document.createElement('DIV');
             bodyCard.classList.add('card-body');
 
             //nombre h5
-            const nombre = document.createElement('H5');
-            nombre.textContent = `${title}`;
-            nombre.classList.add('card-title');
+            const nombreT = document.createElement('H5');
+            nombreT.textContent = `${nombre}`;
+            nombreT.classList.add('card-title');
 
             //p-precio producto
-            const precio = document.createElement('P');
-            precio.classList.add('card-text');
+            const precioT = document.createElement('P');
+            precioT.classList.add('card-text');
             //Suponinendo que el precio esta en dolares, lo multiplico por 1030 para pasarlo a un valor aproximado en pesos
-            precio.textContent = `$${price*1030}`;
+            precioT.textContent = `$${precio}`;
 
             //p-detalle producto
-            const detalle = document.createElement('P');
-            detalle.classList.add('card-text');
-            detalle.textContent = `${description}`;
+            const detalleT = document.createElement('P');
+            detalleT.classList.add('card-text');
+            detalleT.textContent = `${descripcion}`;
 
             //boton de compra (agregar al carrito) con una funcion para agregar el producto al carrito
             const botonComprar = document.createElement('A');
@@ -65,12 +65,12 @@ async function cargarMain(){
             botonComprar.addEventListener('click', e => agregarCarrito(e))
             
             //Agrego los elementos por orden al card
-            bodyCard.appendChild(nombre);
-            bodyCard.appendChild(precio);
-            bodyCard.appendChild(detalle);
+            bodyCard.appendChild(nombreT);
+            bodyCard.appendChild(precioT);
+            bodyCard.appendChild(detalleT);
             bodyCard.appendChild(botonComprar);
             
-            card.appendChild(imagen);
+            card.appendChild(imagenT);
             card.appendChild(bodyCard);
             
             //Agrego la card al contenedor de productos.
